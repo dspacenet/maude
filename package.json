@@ -1,0 +1,31 @@
+{
+  "name": "@dspacenet/maude",
+  "version": "0.1.0",
+  "description": "JavaScript interface to communicate with the Maude System.",
+  "main": "maude.js",
+  "scripts": {
+    "test": "jest",
+    "debug": "node --inspect-brk=9229 maude.js",
+    "start": "node maude.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dspacenet/maude.git"
+  },
+  "keywords": [
+    "maude"
+  ],
+  "author": "Jason Lopez <sebastianlopezn@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dspacenet/maude/issues"
+  },
+  "homepage": "https://github.com/dspacenet/maude#readme",
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "jest": "^23.3.0"
+  },
+  "dependencies": {}
+}
