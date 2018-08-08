@@ -124,6 +124,7 @@ class MaudeProcess {
    * fails or is timeout.
    * @todo add support for automatic result formating for other operations than
    * reduce
+   * @todo add test for correct execution of enqueued commands.
    */
   next() {
     if (!this.busy && this.queue.length > 0) {
@@ -154,13 +155,13 @@ class MaudeProcess {
           } else {
             resolve({ command, raw: data.match(/(.*)\nMaude> $/)[1] });
           }
-          this.clearExecutionTraces();
+          this.clearAndNext();
         }
       });
       this.process.stderr.on('data', (chunk) => {
         errorData += chunk;
         if (/^Warning: /.test(errorData)) {
-          this.clearExecutionTraces();
+          this.clearAndNext();
           reject(new MaudeError(errorData.trim()));
         }
       });
@@ -173,13 +174,16 @@ class MaudeProcess {
    * the event listeners added during the execution of a command, clears the
    * timeout and set the busy flag to false.
    *
+   * Defer the execution of the next command to the next process tick.
+   *
    * @todo ensure that no data is left in output stream.
    */
-  clearExecutionTraces() {
+  clearAndNext() {
     this.process.stdout.removeAllListeners('data');
     this.process.stderr.removeAllListeners('data');
     clearTimeout(this.timeout);
     this.busy = false;
+    process.nextTick(() => this.next());
   }
 
   /**

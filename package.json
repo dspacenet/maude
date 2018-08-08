@@ -1,6 +1,6 @@
 {
   "name": "@dspacenet/maude",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "JavaScript interface to communicate with the Maude System.",
   "main": "maude.js",
   "scripts": {
